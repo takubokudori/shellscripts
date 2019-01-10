@@ -1,10 +1,10 @@
 # update & install require packages
 pacman -Syu
 pacman -S autoconf automake libtool make mingw-w64-i686-toolchain mingw-w64-x86_64-toolchain git svn
+
 # Fix missing platform prefix for windres
 [ -f /mingw64/bin/x86_64-w64-mingw32-windres.exe ] || ln -s /mingw64/bin/windres.exe /mingw64/bin/x86_64-w64-mingw32-windres.exe
 [ -f /mingw32/bin/i686-w64-mingw32-windres.exe  ] || ln -s /mingw32/bin/windres.exe /mingw32/bin/i686-w64-mingw32-windres.exe
-
 
 # mkdir
 mkdir ~/prefix
