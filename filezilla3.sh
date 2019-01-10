@@ -1,7 +1,8 @@
 #!/bin/sh
-# export FZ3_LIBS_DIR=C:\example\you\want\to\install\fz3\libs\directory
+# export FZ3_LIBS_DIR=/c/the/directory/you/wanna/install/filezilla3
 if [ -z "$FZ3_LIBS_DIR" ] ; then
-# update & install require packages
+	
+	# update & install require packages
 	pacman -Syu --noconfirm
 	pacman -S autoconf automake libtool make mingw-w64-i686-toolchain mingw-w64-x86_64-toolchain git svn --noconfirm
 
@@ -10,18 +11,19 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	[ -f /mingw32/bin/i686-w64-mingw32-windres.exe  ] || ln -s /mingw32/bin/windres.exe /mingw32/bin/i686-w64-mingw32-windres.exe
 
 	# mkdir
-	mkdir ~/prefix
-	echo 'export PATH="$HOME/prefix/bin:/mingw64/bin:/mingw32/bin:$PATH"' >> ~/.profile
-	echo 'export PKG_CONFIG_PATH="$HOME/prefix/lib/pkgconfig"' >> ~/.profile
-	echo 'export PATH="$HOME/prefix/bin:/mingw64/bin:/mingw32/bin:$PATH"' >> ~/.bash_profile
-	echo 'export PKG_CONFIG_PATH="$HOME/prefix/lib/pkgconfig"' >> ~/.bash_profile
+	mkdir $FZ3_LIBS_DIR/prefix
+	echo 'export PATH="$FZ3_LIBS_DIR/prefix/bin:/mingw64/bin:/mingw32/bin:$PATH"' >> ~/.profile
+	echo 'export PKG_CONFIG_PATH="$FZ3_LIBS_DIR/prefix/lib/pkgconfig"' >> ~/.profile
+	echo 'export PATH="$FZ3_LIBS_DIR/prefix/bin:/mingw64/bin:/mingw32/bin:$PATH"' >> ~/.bash_profile
+	echo 'export PKG_CONFIG_PATH="$FZ3_LIBS_DIR/prefix/lib/pkgconfig"' >> ~/.bash_profile
+	source ~/.profile
 
 	#build gmp
 	cd $FZ3_LIBS_DIR
 	curl -O https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz
 	tar xf gmp-6.1.2.tar.xz
 	cd gmp-6.1.2
-	./configure --build=x86_64-w64-mingw32 --prefix="$HOME/prefix" --enable-shared --disable-static --enable-fat
+	./configure --build=x86_64-w64-mingw32 --prefix="$FZ3_LIBS_DIR/prefix" --enable-shared --disable-static --enable-fat
 	make && make install
 
 	#build nettle
