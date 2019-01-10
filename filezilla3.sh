@@ -1,5 +1,5 @@
 #!/bin/sh
-# export FZ3_LIBS_DIR=C:\example\
+# export FZ3_LIBS_DIR=C:\example\you\want\to\install\fz3\libs\directory
 if [ -z "$FZ3_LIBS_DIR" ] ; then
 # update & install require packages
 	pacman -Syu --noconfirm
@@ -17,7 +17,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	echo 'export PKG_CONFIG_PATH="$HOME/prefix/lib/pkgconfig"' >> ~/.bash_profile
 
 	#build gmp
-	cd ~
+	cd $FZ3_LIBS_DIR
 	curl -O https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz
 	tar xf gmp-6.1.2.tar.xz
 	cd gmp-6.1.2
@@ -25,7 +25,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	make && make install
 
 	#build nettle
-	cd ~
+	cd $FZ3_LIBS_DIR
 	wget https://ftp.gnu.org/gnu/nettle/nettle-3.4.tar.gz
 	tar xf nettle-3.4.tar.gz
 	cd nettle-3.4
@@ -33,7 +33,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	make && make install
 
 	#build zlib
-	cd ~
+	cd $FZ3_LIBS_DIR
 	wget https://zlib.net/zlib-1.2.11.tar.gz
 	tar xf zlib-1.2.11.tar.gz
 	cd zlib-1.2.11
@@ -41,7 +41,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	make && make install
 
 	#build gnuTLS
-	cd ~
+	cd $FZ3_LIBS_DIR
 	wget ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/gnutls-3.5.19.tar.xz
 	tar xf gnutls-3.5.19.tar.xz
 	cd gnutls-3.5.19
@@ -49,7 +49,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	make && make install
 
 	#build sqlite
-	cd ~
+	cd $FZ3_LIBS_DIR
 	wget https://sqlite.org/2018/sqlite-autoconf-3250300.tar.gz
 	tar xf sqlite-autoconf-3250300.tar.gz
 	cd sqlite-autoconf-3250300
@@ -57,14 +57,14 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	make && make install
 
 	#build wxwidgets
-	cd ~
+	cd $FZ3_LIBS_DIR
 	git clone --branch WX_3_0_BRANCH --single-branch https://github.com/wxWidgets/wxWidgets.git wx3
 	cd wx3
 	./configure --prefix="$HOME/prefix" --enable-shared --disable-static --enable-unicode --without-libtiff --without-libjpeg --with-expat=builtin --with-libpng=builtin
 	make && make install
 
 	#build libfilezilla
-	cd ~
+	cd $FZ3_LIBS_DIR
 	svn co https://svn.filezilla-project.org/svn/libfilezilla/trunk libfilezilla
 	cd libfilezilla
 	autoreconf -i 
@@ -72,7 +72,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	make && make install
 
 	#build filezilla3
-	cd ~
+	cd $FZ3_LIBS_DIR
 	svn co https://svn.filezilla-project.org/svn/FileZilla3/trunk filezilla
 	cd ~/filezilla
 	autoreconf -i
@@ -85,4 +85,6 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	#strip src/fzshellext/64/.libs/libfzshellext-0.dll
 	#strip src/fzshellext/32/.libs/libfzshellext-0.dll
 	#strip data/dlls/*.dll
+else
+	echo "Are you export $FZ3_LIBS_DIR?"
 fi
