@@ -31,7 +31,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	wget https://ftp.gnu.org/gnu/nettle/nettle-3.4.tar.gz
 	tar xf nettle-3.4.tar.gz
 	cd nettle-3.4
-	./configure --build=x86_64-w64-mingw32 --prefix="$HOME/prefix" --enable-shared --disable-static --enable-fat
+	./configure --build=x86_64-w64-mingw32 --prefix="$FZ3_LIBS_DIR/prefix" --enable-shared --disable-static --enable-fat
 	make && make install
 
 	#build zlib
@@ -39,7 +39,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	wget https://zlib.net/zlib-1.2.11.tar.gz
 	tar xf zlib-1.2.11.tar.gz
 	cd zlib-1.2.11
-	LDSHAREDLIBC= ./configure --prefix="$HOME/prefix" -u=GNU
+	LDSHAREDLIBC= ./configure --prefix="$FZ3_LIBS_DIR/prefix" -u=GNU
 	make && make install
 
 	#build gnuTLS
@@ -47,7 +47,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	wget ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/gnutls-3.5.19.tar.xz
 	tar xf gnutls-3.5.19.tar.xz
 	cd gnutls-3.5.19
-	./configure --prefix="$HOME/prefix" --enable-shared --disable-static --build=x86_64-w64-mingw32 --with-included-libtasn1 --disable-doc --disable-guile --without-p11-kit --enable-local-libopts --disable-nls --with-included-unistring --disable-tests
+	./configure --prefix="$FZ3_LIBS_DIR/prefix" --enable-shared --disable-static --build=x86_64-w64-mingw32 --with-included-libtasn1 --disable-doc --disable-guile --without-p11-kit --enable-local-libopts --disable-nls --with-included-unistring --disable-tests
 	make && make install
 
 	#build sqlite
@@ -55,14 +55,14 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	wget https://sqlite.org/2018/sqlite-autoconf-3250300.tar.gz
 	tar xf sqlite-autoconf-3250300.tar.gz
 	cd sqlite-autoconf-3250300
-	./configure --build=x86_64-w64-mingw32 --prefix="$HOME/prefix" --enable-shared --disable-static
+	./configure --build=x86_64-w64-mingw32 --prefix="$FZ3_LIBS_DIR/prefix" --enable-shared --disable-static
 	make && make install
 
 	#build wxwidgets
 	cd $FZ3_LIBS_DIR
 	git clone --branch WX_3_0_BRANCH --single-branch https://github.com/wxWidgets/wxWidgets.git wx3
 	cd wx3
-	./configure --prefix="$HOME/prefix" --enable-shared --disable-static --enable-unicode --without-libtiff --without-libjpeg --with-expat=builtin --with-libpng=builtin
+	./configure --prefix="$FZ3_LIBS_DIR/prefix" --enable-shared --disable-static --enable-unicode --without-libtiff --without-libjpeg --with-expat=builtin --with-libpng=builtin
 	make && make install
 
 	#build libfilezilla
@@ -70,7 +70,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	svn co https://svn.filezilla-project.org/svn/libfilezilla/trunk libfilezilla
 	cd libfilezilla
 	autoreconf -i 
-	./configure --prefix="$HOME/prefix" --enable-shared --disable-static
+	./configure --prefix="$FZ3_LIBS_DIR/prefix" --enable-shared --disable-static
 	make && make install
 
 	#build filezilla3
