@@ -76,7 +76,7 @@ if [ -z "$FZ3_LIBS_DIR" ] ; then
 	#build filezilla3
 	cd $FZ3_LIBS_DIR
 	svn co https://svn.filezilla-project.org/svn/FileZilla3/trunk filezilla
-	cd ~/filezilla
+	cd $FZ3_LIBS_DIR/filezilla
 	autoreconf -i
 	./configure --with-pugixml=builtin
 	make
