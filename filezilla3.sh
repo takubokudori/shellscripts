@@ -2,13 +2,13 @@
 # export FZ3_LIBS_DIR=/c/the/directory/you/wanna/install/filezilla3
 if [ -z "$FZ3_LIBS_DIR" ] ; then
 	
-	# update & install require packages
-	pacman -Syu --noconfirm
-	pacman -S autoconf automake libtool make mingw-w64-i686-toolchain mingw-w64-x86_64-toolchain git svn --noconfirm
-
 	# Fix missing platform prefix for windres
 	[ -f /mingw64/bin/x86_64-w64-mingw32-windres.exe ] || ln -s /mingw64/bin/windres.exe /mingw64/bin/x86_64-w64-mingw32-windres.exe
 	[ -f /mingw32/bin/i686-w64-mingw32-windres.exe  ] || ln -s /mingw32/bin/windres.exe /mingw32/bin/i686-w64-mingw32-windres.exe
+	
+	# update & install require packages
+	pacman -Syu --noconfirm
+	pacman -S autoconf automake libtool make mingw-w64-i686-toolchain mingw-w64-x86_64-toolchain git svn --noconfirm
 
 	# mkdir
 	mkdir $FZ3_LIBS_DIR/prefix
