@@ -8,14 +8,14 @@ sudo apt install -y perl
 sudo apt install -y gcc gdb gdb-server clang
 sudo apt install smbclient cifs-utils
 git https://github.com/takubokudori/vimrcs ~
-systemctl start snapd
-systemctl enable snapd
-systemctl start apparmor
-systemctl enable apparmor
+sudo systemctl start snapd
+sudo systemctl enable snapd
+sudo systemctl start apparmor
+sudo systemctl enable apparmor
 # echo "PATH=$PATH:/snap/bin" >> ~/.bashrc
 # Install Slack
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-3.3.7-amd64.deb -O /tmp/slack-desktop.deb # Download Slack
-sudo dpkg -i slack-desktop.deb
-apt --fix-broken install
-sudo dpkg -i slack-desktop.deb
+sudo dpkg -i /tmp/slack-desktop.deb
+sudo apt --fix-broken install
+sudo dpkg -i /tmp/slack-desktop.deb
 # vi
