@@ -2,11 +2,15 @@
 # echo "https://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
 sudo apt update
 sudo apt full-upgrade -y
-sudo apt install -y task-japanese task-japanese-desktop vim-gtk uim uim-anthy snapd thefuck
+sudo apt install -y task-japanese task-japanese-desktop
+sudo apt install vim-gtk uim uim-anthy snapd tree
 sudo apt install -y python3 python3-dev python3-pip python python-dev python-pip
 sudo apt install -y perl
 sudo apt install -y gcc gdb gdb-server clang
 sudo apt install smbclient cifs-utils
+sudo apt install thefuck
+echo "eval $(thefuck --alias)" >> ~/.bashrc
+echo "eval $(thefuck --alias FUCK)" >> ~/.bashrc
 git https://github.com/takubokudori/vimrcs ~
 sudo systemctl start snapd
 sudo systemctl enable snapd
